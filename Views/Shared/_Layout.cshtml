@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Identity
+<!DOCTYPE html>
+@inject SignInManager<IdentityUser> SignInManager
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-info navbar-expand-md border-bottom box-shadow mb-3">
+            <div class="container">
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand d-inline-block">Biblioteczka</a>
+                <ul class="nav navbar-nav"></ul>
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm"
+                          method="post" class="navbar-right">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a class="btn btn-light mr-2" id="logoutLink" asp-controller="Book" asp-action="Index">CRUD</a></li>
+                            <li><a class="btn btn-light" id="logoutLink" href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>
+                        </ul>
+                    </form>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav">
+                        <li><a class="btn btn-light mr-2" id="registerLink" asp-controller="Account" asp-action="Register">Rejestracja</a></li>
+                        <li><a class="btn btn-light" id="loginLink" asp-controller="Account" asp-action="Login">Logowanie</a></li>
+                    </ul>
+                }
+
+            </div>
+        </nav>
+    </header>
+    <div class="container body-content">
+        <div class="row">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

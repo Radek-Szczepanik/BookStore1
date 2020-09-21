@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Book>
+
+<div class="container">
+    <div class="row">
+        @foreach (var book in Model)
+        {
+            <div class="col-md-4">
+                <a asp-controller="Home" asp-action="Details" asp-route-id="@book.Id" class="card" style="text-decoration: none">@book.Title <br /> @book.Author</a>
+            </div>
+        }
+    </div>
+</div>
